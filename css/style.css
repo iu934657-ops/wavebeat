@@ -8,6 +8,8 @@
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
     scroll-behavior:smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 body{
@@ -71,6 +73,7 @@ a{
 img{
     width:100%;
     display:block;
+    max-width:100%;
 }
 
 /* ==================================
@@ -139,12 +142,31 @@ img{
         #00d4ff,
         #7b2cff
     );
+    
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.login-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
+}
+
+.login-btn:active{
+    transform: translateY(0);
 }
 
 .menu-toggle{
     display:none;
     font-size:1.5rem;
     cursor:pointer;
+    transition: 0.3s;
+    padding: 5px;
+    user-select: none;
+}
+
+.menu-toggle:active{
+    color: #00d4ff;
 }
 
 /* ==================================
@@ -216,6 +238,12 @@ img{
     cursor:pointer;
 
     transition:.3s;
+    
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
 
 .primary-btn{
@@ -239,6 +267,12 @@ img{
 .primary-btn:hover,
 .secondary-btn:hover{
     transform:translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.2);
+}
+
+.primary-btn:active,
+.secondary-btn:active{
+    transform:translateY(-1px);
 }
 
 .hero-visual{
@@ -303,16 +337,24 @@ img{
     transition:.3s;
 
     backdrop-filter:blur(10px);
+    
+    cursor: pointer;
+    user-select: none;
 }
 
 .card i{
     font-size:2rem;
     margin-bottom:15px;
     color:#00d4ff;
+    transition: 0.3s;
 }
 
 .card:hover{
     transform:translateY(-10px);
+}
+
+.card:active{
+    transform:translateY(-5px);
 }
 
 /* ==================================
@@ -613,6 +655,22 @@ footer{
         #00d4ff,
         #7b2cff
     );
+    
+    min-width: 44px;
+    min-height: 44px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-controls button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.player-controls button:active{
+    transform: scale(0.95);
 }
 
 .progress-area{
@@ -654,10 +712,30 @@ footer{
 }
 
 /* ==================================
-   MOBILE
+   MOBILE (iPad & Tablets)
 ================================== */
 
 @media screen and (max-width:768px){
+
+    /* Global Adjustments */
+    section{
+        padding:60px 5%;
+    }
+
+    h2{
+        font-size:2.2rem;
+        margin-bottom:30px;
+    }
+
+    /* Navbar */
+    .navbar{
+        height:70px;
+        padding:0 5%;
+    }
+
+    .logo{
+        font-size:1.5rem;
+    }
 
     .menu-toggle{
         display:block;
@@ -669,7 +747,7 @@ footer{
 
     .nav-links{
         position:absolute;
-        top:80px;
+        top:70px;
         left:0;
 
         width:100%;
@@ -678,74 +756,424 @@ footer{
 
         flex-direction:column;
 
-        background:#050816;
+        background:rgba(5,8,22,0.98);
+        backdrop-filter:blur(20px);
 
-        padding:20px;
+        padding:15px 0;
 
         text-align:center;
+
+        z-index:999;
+    }
+
+    .nav-links a{
+        padding:12px 0;
+        border-bottom:1px solid rgba(255,255,255,.05);
     }
 
     .nav-links.active{
         display:flex;
     }
 
-    .hero-content h1{
-        font-size:2.8rem;
+    /* Hero Section */
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        gap:30px;
+        padding-top:100px;
+        min-height:auto;
     }
 
-    .featured-grid,
-    .library-grid,
-    .artist-grid,
+    .hero-content h1{
+        font-size:2.5rem;
+        line-height:1.2;
+        margin-bottom:15px;
+    }
+
+    .hero-content p{
+        font-size:0.95rem;
+        margin-bottom:25px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .btn{
+        width:100%;
+        padding:13px 25px;
+        font-size:0.95rem;
+    }
+
+    .music-orb,
+    .orb{
+        width:250px;
+        height:250px;
+    }
+
+    /* Featured Grid */
+    .featured-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .card{
+        padding:25px;
+    }
+
+    /* Library Grid */
+    .library-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .song-card img{
+        height:220px;
+    }
+
+    .search-box{
+        font-size:0.95rem;
+        padding:12px 15px;
+        margin-bottom:25px;
+    }
+
+    /* Artist Grid */
+    .artist-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .artist-card img{
+        width:120px;
+        height:120px;
+    }
+
+    /* Pricing Grid */
     .pricing-grid{
         grid-template-columns:1fr;
+        gap:20px;
     }
 
+    .price-card{
+        padding:30px 20px;
+    }
+
+    /* Contact Form */
+    .contact input{
+        width:100%;
+        max-width:100%;
+    }
+
+    /* Music Player */
     .music-player{
         flex-direction:column;
         height:auto;
-        padding:15px;
-        gap:10px;
+        padding:12px;
+        gap:8px;
     }
 
     .progress-area{
         width:100%;
     }
 
+    .player-controls{
+        width:100%;
+        justify-content:center;
+    }
+
     body{
-        padding-bottom:160px;
+        padding-bottom:140px;
     }
 }
 
 /* ==================================
-   SMALL MOBILE
+   SMALL MOBILE (Phones < 480px)
 ================================== */
 
 @media screen and (max-width:480px){
 
+    /* Global */
+    section{
+        padding:40px 4%;
+    }
+
     h2{
-        font-size:2rem;
+        font-size:1.8rem;
+        margin-bottom:20px;
+    }
+
+    /* Navbar */
+    .navbar{
+        height:60px;
+        padding:0 4%;
+    }
+
+    .logo{
+        font-size:1.3rem;
+    }
+
+    .logo i{
+        margin-right:5px;
+    }
+
+    .menu-toggle{
+        font-size:1.3rem;
+    }
+
+    .nav-links{
+        top:60px;
+    }
+
+    .nav-links a{
+        font-size:0.95rem;
+        padding:10px 0;
+    }
+
+    /* Hero */
+    .hero{
+        padding-top:80px;
+        gap:20px;
     }
 
     .hero-content h1{
-        font-size:2.2rem;
+        font-size:1.8rem;
+        line-height:1.3;
+        margin-bottom:12px;
     }
 
-    .hero-buttons{
-        flex-direction:column;
+    .hero-content p{
+        font-size:0.88rem;
+        line-height:1.6;
+        margin-bottom:15px;
+    }
+
+    .hero-badge{
+        font-size:0.8rem;
+        padding:8px 12px;
     }
 
     .primary-btn,
-    .secondary-btn{
-        width:100%;
+    .secondary-btn,
+    .btn{
+        font-size:0.9rem;
+        padding:11px 20px;
+        border-radius:25px;
+    }
+
+    .music-orb,
+    .orb{
+        width:180px;
+        height:180px;
+    }
+
+    /* Featured Grid */
+    .featured-grid{
+        gap:12px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .card i{
+        font-size:1.8rem;
+        margin-bottom:10px;
+    }
+
+    .card h3{
+        font-size:1rem;
+        margin-bottom:5px;
+    }
+
+    .card p{
+        font-size:0.85rem;
+    }
+
+    /* Library */
+    .library-grid{
+        gap:15px;
+    }
+
+    .song-card{
+        border-radius:15px;
     }
 
     .song-card img{
-        height:200px;
+        height:180px;
     }
 
-    .music-orb{
-        width:220px;
-        height:220px;
+    .song-card h3{
+        font-size:0.95rem;
+        padding:12px 15px 3px;
+    }
+
+    .song-card p{
+        font-size:0.8rem;
+        padding:0 15px;
+    }
+
+    .play-song{
+        font-size:0.85rem;
+        margin:12px;
+        padding:10px 15px;
+    }
+
+    .search-box{
+        font-size:0.9rem;
+        padding:10px 12px;
+        margin-bottom:15px;
+    }
+
+    /* Artist Grid */
+    .artist-grid{
+        gap:15px;
+    }
+
+    .artist-card{
+        padding:20px;
+    }
+
+    .artist-card img{
+        width:100px;
+        height:100px;
+    }
+
+    /* Pricing */
+    .pricing-grid{
+        gap:15px;
+    }
+
+    .price-card{
+        padding:20px;
+    }
+
+    .price-card h1{
+        font-size:2rem;
+    }
+
+    .price-card h3{
+        font-size:1.1rem;
+    }
+
+    /* Contact */
+    .contact-page{
+        padding:60px 4%;
+    }
+
+    .contact-page h2{
+        font-size:1.8rem;
+    }
+
+    .contact-form{
+        gap:12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+        font-size:0.9rem;
+    }
+
+    .contact input{
+        font-size:0.9rem;
+    }
+
+    /* About Page */
+    .about-page{
+        padding:60px 4%;
+    }
+
+    .about-page h2{
+        font-size:1.8rem;
+    }
+
+    .about-grid{
+        gap:15px;
+    }
+
+    .about-card{
+        padding:20px;
+    }
+
+    /* Music Player */
+    .music-player{
+        height:auto;
+        padding:10px;
+        gap:8px;
+    }
+
+    .song-info h4{
+        font-size:0.9rem;
+    }
+
+    .song-info p{
+        font-size:0.75rem;
+    }
+
+    .player-controls button{
+        width:40px;
+        height:40px;
+        font-size:0.9rem;
+    }
+
+    .progress-area{
+        font-size:0.8rem;
+    }
+
+    body{
+        padding-bottom:120px;
+    }
+}
+
+/* ==================================
+   EXTRA SMALL (< 360px)
+================================== */
+
+@media screen and (max-width:360px){
+
+    section{
+        padding:30px 3%;
+    }
+
+    h2{
+        font-size:1.6rem;
+    }
+
+    .navbar{
+        height:55px;
+        padding:0 3%;
+    }
+
+    .logo{
+        font-size:1.2rem;
+    }
+
+    .hero{
+        padding-top:70px;
+    }
+
+    .hero-content h1{
+        font-size:1.5rem;
+    }
+
+    .hero-content p{
+        font-size:0.8rem;
+    }
+
+    .music-orb,
+    .orb{
+        width:150px;
+        height:150px;
+    }
+
+    .card,
+    .song-card,
+    .artist-card,
+    .price-card,
+    .about-card{
+        padding:15px;
     }
 }
 html {
