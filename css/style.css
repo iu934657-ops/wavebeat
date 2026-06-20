@@ -156,6 +156,10 @@ img{
     transform: translateY(0);
 }
 
+.mobile-login-btn{
+    display:none;
+}
+
 .menu-toggle{
     display:none;
     font-size:1.5rem;
@@ -745,6 +749,10 @@ footer{
         display:none;
     }
 
+    .mobile-login-btn{
+        display:none;
+    }
+
     .nav-links{
         position:absolute;
         top:70px;
@@ -769,6 +777,18 @@ footer{
     .nav-links a{
         padding:12px 0;
         border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .nav-links .mobile-login-btn{
+        display:block;
+        padding:12px 0;
+        background: linear-gradient(90deg, #00d4ff, #7b2cff);
+        margin:10px 20px 0;
+        border-radius: 8px;
+    }
+
+    .nav-links .mobile-login-btn:hover{
+        opacity: 0.9;
     }
 
     .nav-links.active{
