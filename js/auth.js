@@ -10,15 +10,31 @@ function getCurrentUser() {
 
 function setLoginButtonState() {
     const loginBtn = document.querySelector(".login-btn");
-    if (!loginBtn) return;
-
+    const mobileLoginLink = document.querySelector(".mobile-login-btn");
     const user = getCurrentUser();
-    if (user && user.name) {
-        loginBtn.textContent = `Logout (${user.name})`;
-        loginBtn.classList.add("logged-in");
-    } else {
-        loginBtn.textContent = "Login";
-        loginBtn.classList.remove("logged-in");
+
+    if (loginBtn) {
+        if (user && user.name) {
+            loginBtn.textContent = `Logout (${user.name})`;
+            loginBtn.classList.add("logged-in");
+        } else {
+            loginBtn.textContent = "Login";
+            loginBtn.classList.remove("logged-in");
+        }
+    }
+
+    if (mobileLoginLink) {
+        if (user && user.name) {
+            mobileLoginLink.textContent = `Logout (${user.name})`;
+            mobileLoginLink.setAttribute("href", "#");
+            mobileLoginLink.classList.add("logged-in");
+            mobileLoginLink.dataset.logged = "true";
+        } else {
+            mobileLoginLink.textContent = "Login";
+            mobileLoginLink.setAttribute("href", "login.html");
+            mobileLoginLink.classList.remove("logged-in");
+            delete mobileLoginLink.dataset.logged;
+        }
     }
 }
 
@@ -32,12 +48,36 @@ function handleLoginButtonClick() {
     }
 }
 
+function handleMobileLoginClick(e) {
+    const mobileLoginLink = document.querySelector(".mobile-login-btn");
+    if (!mobileLoginLink) return;
+
+    const user = getCurrentUser();
+    if (user) {
+        e.preventDefault();
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+        // close mobile nav if open
+        const navLinks = document.querySelector(".nav-links");
+        if (navLinks && navLinks.classList.contains("active")) {
+            navLinks.classList.remove("active");
+        }
+        // reload to update UI
+        window.location.reload();
+    }
+    // if not logged in, allow navigation to login.html
+}
+
 function initializeAuth() {
     const loginBtn = document.querySelector(".login-btn");
     if (!loginBtn) return;
 
     setLoginButtonState();
     loginBtn.addEventListener("click", handleLoginButtonClick);
+
+    const mobileLoginLink = document.querySelector(".mobile-login-btn");
+    if (mobileLoginLink) {
+        mobileLoginLink.addEventListener("click", handleMobileLoginClick);
+    }
 }
 
 function ensureLoggedOutOnLoginPage() {

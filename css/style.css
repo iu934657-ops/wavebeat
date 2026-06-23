@@ -156,6 +156,18 @@ img{
     transform: translateY(0);
 }
 
+/* Logged-in visual state */
+.login-btn.logged-in{
+    background: linear-gradient(90deg,#5eead4,#34d399);
+    color:#052f2a;
+    box-shadow:0 6px 18px rgba(52,211,153,0.18);
+}
+
+.mobile-login-btn.logged-in{
+    background: linear-gradient(90deg,#5eead4,#34d399);
+    color:#052f2a;
+}
+
 .mobile-login-btn{
     display:none;
 }
